@@ -1,5 +1,5 @@
 /*
- * *** YOUR NAME GOES HERE / YOUR SECTION NUMBER ***
+ * *** Sarah Fink / Section 001 ***
  *
  * This HashingProblems object contains three methods / problems that you must
  * complete utilize the HashMap object within the Java's Collection Framework Library.
@@ -41,7 +41,23 @@ class HashingProblems {
          * returning 0.0/0.0 IS correct (which would return a non-number).
          */
 
-         return 0.0 / 0.0;
+        double sum = 0;
+        int count = 0;
+
+        // find matching keys in the array
+        for (Integer key : array) {
+            if (map.containsKey(key)) {
+                sum += map.get(key); // add value to the sum
+                count++; // count up
+            }
+        }
+
+        // if no keys, return 0
+        if (count == 0) {
+            return 0;
+        }
+
+        return sum / count;
   }
 
 
@@ -53,17 +69,20 @@ class HashingProblems {
      */
 
   public ArrayList<String> odd(HashMap<Integer, String> map) {
-    
-      ArrayList<String> result = new ArrayList<>();
+      ArrayList<String> oddValues = new ArrayList<>();
 
-      /*
-       * ADD YOUR CODE HERE
-       *
-       * Hint: Consider iterating over the HashMap using the keySet method.
-       */
+      // iterate over the entry set of the HashMap
+      for (HashMap.Entry<Integer, String> entry : map.entrySet()) {
+          Integer key = entry.getKey();
+          String value = entry.getValue();
 
+          // check if key is odd
+          if (key % 2 != 0) {
+              oddValues.add(value); // add value to ArrayList if it is odd
+          }
+      }
 
-      return result;
+      return oddValues;
   }
 
 
@@ -109,8 +128,26 @@ class HashingProblems {
       /*
        * ADD YOUR CODE HERE
        */
+      HashSet<Integer> seenNumbers = new HashSet<>();
+      int count = 0;
 
-      return -1;
+      // iterate through the array and check for valid pairs
+      for (int num : numbers) {
+          // check if num-k exists
+          if (seenNumbers.contains(num - k)) {
+              count++;
+          }
+
+          // check if num+k exists
+          if (seenNumbers.contains(num + k)) {
+              count++;
+          }
+
+
+          seenNumbers.add(num);
+      }
+
+      return count;
   }
 
 } /* end class HashingProblems */
